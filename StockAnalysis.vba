@@ -40,9 +40,12 @@ Sub stockAnalysis()
         'Opening price and closing price for the year
         Dim openingPrice As Double
         Dim closingPrice As Double
+        Dim totalVolume As Double
+        
         'Row in which data for current ticker will be entered
         Dim summaryTableRow As Integer
         summaryTableRow = 2
+        totalVolume = 0
     
         'Gets stock data for volume and price change
         For Row = 2 To lastRow
@@ -64,6 +67,9 @@ Sub stockAnalysis()
                 'Calculate yearly change and adds it to the yearly change column
                 Range("J" & summaryTableRow).Value = closingPrice - openingPrice
                 Range("J" & summaryTableRow).NumberFormat = "0.00"
+                
+                Range("L" & summaryTableRow).Value = totalVolume
+                
                 'Colors positive change green and negative change red
                 If Range("J" & summaryTableRow).Value > 0 Then
                     Range("J" & summaryTableRow).Interior.ColorIndex = 4
@@ -82,11 +88,12 @@ Sub stockAnalysis()
                 'Reset numbers and move to next row of data table
                 openingPrice = 0
                 summaryTableRow = summaryTableRow + 1
+                totalVolume = 0
             
             Else
             
-                'Add on to total stock volume for current ticker
-                Range("L" & summaryTableRow).Value = Range("L" & summaryTableRow).Value + Cells(Row, 7).Value
+                'Add up current stock volume to the total
+                totalVolume = totalVolume + Cells(Row, 7).Value
         
             End If
         
