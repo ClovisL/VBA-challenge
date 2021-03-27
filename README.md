@@ -2,4 +2,4 @@
 
 ## Stock analysis script
 
-### NOTE: Columns for data need to be empty before running, as a workaround to a stack overflow issue. Use the reset sub if needed.
+### NOTE: Reset button not neccessary for code to run.
